@@ -203,4 +203,64 @@ function bmiCalc(){
   const w=parseFloat(document.getElementById("weight").value);
   const h=parseFloat(document.getElementById("height").value)/100;
 
-  if(!w||!
+  if(!w||!h){
+    document.getElementById("bmiResult").textContent="Masukkan berat dan tinggi";
+    return;
+  }
+
+  const bmi=w/(h*h);
+  let status="";
+
+  if(bmi<18.5) status="Kurang berat";
+  else if(bmi<25) status="Normal";
+  else if(bmi<30) status="Berlebihan berat";
+  else status="Obes";
+
+  document.getElementById("bmiResult").textContent=
+    "BMI: "+bmi.toFixed(1)+" — "+status;
+}
+
+function ageCalc(){
+  const birth=new Date(document.getElementById("birth").value);
+
+  if(isNaN(birth)){
+    document.getElementById("ageResult").textContent="Pilih tarikh lahir";
+    return;
+  }
+
+  const today=new Date();
+  let age=today.getFullYear()-birth.getFullYear();
+
+  const m=today.getMonth()-birth.getMonth();
+
+  if(m<0 || (m===0 && today.getDate()<birth.getDate())){
+    age--;
+  }
+
+  document.getElementById("ageResult").textContent=
+    "Umur anda: "+age+" tahun";
+}
+
+function countText(){
+  const text=document.getElementById("textInput").value;
+  const words=text.trim()?text.trim().split(/\s+/).length:0;
+
+  document.getElementById("textResult").innerHTML=
+    "Perkataan: "+words+"<br>Aksara: "+text.length;
+}
+
+function generatePassword(){
+  const length=parseInt(document.getElementById("passLength").value)||12;
+  const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+  let password="";
+
+  for(let i=0;i<length;i++){
+    password+=chars[Math.floor(Math.random()*chars.length)];
+  }
+
+  document.getElementById("passResult").textContent=password;
+}
+</script>
+
+</body>
+</html>
