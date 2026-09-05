@@ -1,12 +1,206 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basic Tools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Basic Tools</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f6fa;
+  color:#222;
+}
+header{
+  background:#111827;
+  color:white;
+  padding:22px 18px;
+  text-align:center;
+}
+header h1{margin:0 0 6px}
+header p{margin:0;opacity:.8}
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:18px;
+}
+.card{
+  background:white;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+h2{margin-top:0}
+input,textarea,select,button{
+  width:100%;
+  padding:13px;
+  margin-top:8px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-size:16px;
+}
+textarea{min-height:120px;resize:vertical}
+button{
+  background:#111827;
+  color:white;
+  border:0;
+  cursor:pointer;
+}
+button:hover{opacity:.9}
+.result{
+  margin-top:12px;
+  padding:14px;
+  background:#f1f5f9;
+  border-radius:10px;
+  font-weight:bold;
+}
+.tool{display:none}
+.tool.active{display:block}
+.menu{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.menu button{
+  min-height:60px;
+}
+.back{
+  background:#6b7280;
+  margin-bottom:12px;
+}
+footer{
+  text-align:center;
+  padding:25px;
+  color:#777;
+  font-size:13px;
+}
+</style>
 </head>
+
 <body>
+
+<header>
   <h1>Basic Tools</h1>
-  <p>App sedang disediakan.</p>
-</body>
-</html>
+  <p>Tools mudah dalam satu aplikasi</p>
+</header>
+
+<div class="container">
+
+<!-- MENU -->
+<div id="home" class="card">
+  <h2>🛠️ Pilih Tools</h2>
+
+  <div class="menu">
+    <button onclick="showTool('calculator')">🧮 Calculator</button>
+    <button onclick="showTool('percentage')">📊 Percentage</button>
+    <button onclick="showTool('bmi')">⚖️ BMI Calculator</button>
+    <button onclick="showTool('age')">🎂 Age Calculator</button>
+    <button onclick="showTool('text')">📝 Text Counter</button>
+    <button onclick="showTool('password')">🔐 Password Generator</button>
+  </div>
+</div>
+
+<!-- CALCULATOR -->
+<div id="calculator" class="card tool">
+<button class="back" onclick="home()">← Kembali</button>
+<h2>🧮 Calculator</h2>
+<input id="calc" placeholder="Contoh: 25+10*2">
+<button onclick="calculate()">Kira</button>
+<div id="calcResult" class="result"></div>
+</div>
+
+<!-- PERCENTAGE -->
+<div id="percentage" class="card tool">
+<button class="back" onclick="home()">← Kembali</button>
+<h2>📊 Percentage</h2>
+<input id="percentA" type="number" placeholder="Nilai">
+<input id="percentB" type="number" placeholder="Jumlah">
+<button onclick="percentage()">Kira %</button>
+<div id="percentResult" class="result"></div>
+</div>
+
+<!-- BMI -->
+<div id="bmi" class="card tool">
+<button class="back" onclick="home()">← Kembali</button>
+<h2>⚖️ BMI Calculator</h2>
+<input id="weight" type="number" placeholder="Berat (kg)">
+<input id="height" type="number" placeholder="Tinggi (cm)">
+<button onclick="bmiCalc()">Kira BMI</button>
+<div id="bmiResult" class="result"></div>
+</div>
+
+<!-- AGE -->
+<div id="age" class="card tool">
+<button class="back" onclick="home()">← Kembali</button>
+<h2>🎂 Age Calculator</h2>
+<input id="birth" type="date">
+<button onclick="ageCalc()">Kira Umur</button>
+<div id="ageResult" class="result"></div>
+</div>
+
+<!-- TEXT -->
+<div id="text" class="card tool">
+<button class="back" onclick="home()">← Kembali</button>
+<h2>📝 Text Counter</h2>
+<textarea id="textInput" oninput="countText()" placeholder="Taip atau paste teks di sini..."></textarea>
+<div id="textResult" class="result">
+Perkataan: 0<br>
+Aksara: 0
+</div>
+</div>
+
+<!-- PASSWORD -->
+<div id="password" class="card tool">
+<button class="back" onclick="home()">← Kembali</button>
+<h2>🔐 Password Generator</h2>
+<input id="passLength" type="number" value="12" min="4" max="50">
+<button onclick="generatePassword()">Generate Password</button>
+<div id="passResult" class="result"></div>
+</div>
+
+</div>
+
+<footer>
+  Basic Tools
+</footer>
+
+<script>
+function showTool(id){
+  document.getElementById("home").style.display="none";
+  document.querySelectorAll(".tool").forEach(x=>x.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function home(){
+  document.querySelectorAll(".tool").forEach(x=>x.classList.remove("active"));
+  document.getElementById("home").style.display="block";
+}
+
+function calculate(){
+  const value=document.getElementById("calc").value;
+  try{
+    if(!/^[0-9+\-*/().%\s]+$/.test(value)) throw Error();
+    document.getElementById("calcResult").textContent=eval(value);
+  }catch{
+    document.getElementById("calcResult").textContent="Formula tidak sah";
+  }
+}
+
+function percentage(){
+  const a=parseFloat(document.getElementById("percentA").value);
+  const b=parseFloat(document.getElementById("percentB").value);
+  if(!isFinite(a)||!isFinite(b)||b===0){
+    document.getElementById("percentResult").textContent="Masukkan nilai yang betul";
+    return;
+  }
+  document.getElementById("percentResult").textContent=(a/b*100).toFixed(2)+"%";
+}
+
+function bmiCalc(){
+  const w=parseFloat(document.getElementById("weight").value);
+  const h=parseFloat(document.getElementById("height").value)/100;
+
+  if(!w||!
