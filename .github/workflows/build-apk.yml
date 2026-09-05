@@ -18,7 +18,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-        
 
       - name: Install dependencies
         run: npm install
@@ -32,6 +31,9 @@ jobs:
       - name: Initialize Capacitor
         run: |
           npx cap init "Basic Tools" "com.otoksemut.basictools" --web-dir dist
+
+      - name: Install Android platform
+        run: npm install @capacitor/android
 
       - name: Add Android
         run: npx cap add android
