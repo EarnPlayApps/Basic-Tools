@@ -1,0 +1,16 @@
+{
+  "name": "basic-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Basic Tools - Simple tools. Made useful.",
+  "scripts": {
+    "build": "echo Basic Tools ready for Capacitor"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/android": "^7.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0"
+  }
+}
