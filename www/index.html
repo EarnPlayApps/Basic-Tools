@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08090d">
+  <title>Basic Tools</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">BT</div>
+    <div>
+      <h2>Basic Tools</h2>
+      <small>Simple tools. Made useful.</small>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <small>OFFLINE • PRIVATE • FAST</small>
+      <h1>Everyday tools,<br><span>beautifully simple.</span></h1>
+      <p>Useful tools that work directly on your device.</p>
+    </section>
+
+    <h2 class="title">Tools</h2>
+
+    <div class="tools">
+
+      <button onclick="calculator()">
+        🧮
+        <b>Calculator</b>
+        <small>Quick calculations</small>
+      </button>
+
+      <button onclick="percentage()">
+        %
+        <b>Percentage</b>
+        <small>Calculate percentages</small>
+      </button>
+
+      <button onclick="textCounter()">
+        📝
+        <b>Text Counter</b>
+        <small>Words & characters</small>
+      </button>
+
+      <button onclick="passwordGenerator()">
+        🔐
+        <b>Password Generator</b>
+        <small>Generate passwords</small>
+      </button>
+
+      <button onclick="qrGenerator()">
+        ▣
+        <b>QR Generator</b>
+        <small>Works offline</small>
+      </button>
+
+    </div>
+
+    <div id="output"></div>
+  </main>
+
+  <footer>
+    <span>Basic Tools</span>
+    <span>Version 1.0.0</span>
+  </footer>
+
+  <script src="qrcode.min.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
